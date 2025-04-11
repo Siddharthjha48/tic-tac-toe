@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .column{
+      width: 100px;
+      height: 80px;
+      border: 1px solid black;
+      gap: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      cursor : pointer;
+
+      
+    }
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .grids{
+display: flex;
+      grid-template-columns: 1fr 1fr 1fr;
+
+    }
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    
+  </style>
+</head>
+<body>
+  <div class ="container">
+    <div class="grids">
+      <div class="row">
+        <div onclick = "handle( this)" id = "0" class="column"></div>
+        <div onclick = "handle( this)" id = "1"  class="column"></div>
+        <div onclick = "handle( this)" id = "2" class="column"></div>
+      </div>
+      <div class="row">
+        <div onclick = "handle( this)" id = "3"  class="column"></div>
+        <div onclick = "handle( this)" id = "4"  class="column"></div>
+        <div  onclick = "handle( this)" id = "5" class="column"></div>
+      </div>
+      <div class="row">
+        <div  onclick = "handle( this)" id = "6" class="column"></div>
+        <div onclick = "handle( this)" id = "7"  class="column"></div>
+        <div onclick = "handle( this)" id = "8"  class="column"></div>
+      </div>
+    </div>
+
+  </div>
+  
+
+  <script>
+    let currentPlayer = 'X';
+    let arr = Array(9).fill(null);
+    
+ function handle(element){
+ const id = Number(element.id);
+ if(arr[id] !== null){
+   return;
+ }
+ arr[id] = currentPlayer;
+ element.innerText = currentPlayer;
+ chechWinner();
+ currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+ }
+ function chechWinner(){
+   if(
+    (arr[0] === arr[1] && arr[1] === arr[2] && arr[0] !== null) ||
+    (arr[3] === arr[4] && arr[4] === arr[5] && arr[3] !== null) ||
+    (arr[6] === arr[7] && arr[7] === arr[8] && arr[6] !== null) ||
+    (arr[0] === arr[3] && arr[3] === arr[6] && arr[0] !== null) ||
+    (arr[1] === arr[4] && arr[4] === arr[7] && arr[1] !== null) ||
+    (arr[2] === arr[5] && arr[5] === arr[8] && arr[2] !== null) ||
+    (arr[0] === arr[4] && arr[4] === arr[8] && arr[0] !== null) ||
+    (arr[2] === arr[4] && arr[4] === arr[6] &&  arr[2] !== null)
+   ){
+    document.write(`Player ${currentPlayer} won the game`);
+    return;
+   }
+
+   if(arr.every((item) => item !== null)){
+    document.write("Game Draw");
+    return;
+   }
+   
+ }
+  </script>
+</body>
+</html>
